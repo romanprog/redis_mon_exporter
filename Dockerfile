@@ -10,6 +10,6 @@ FROM alpine
 
 RUN apk --no-cache add ca-certificates
 WORKDIR /usr/bin/
-COPY --from=0 /go/src/github.com/alexellis/href-counter/app .
+COPY --from=0 /usr/bin/redis_mon_exporter .
 
 ENTRYPOINT ["/usr/bin/redis_mon_exporter"]
