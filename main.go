@@ -50,7 +50,7 @@ func testRedis(server string) int {
 }
 
 func DoTests(w http.ResponseWriter, r *http.Request) {
-	lineTemplate := "redis_mon_write_check{instance=\"%s\"} %b\n"
+	lineTemplate := "redis_mon_write_check %b\n"
 	log.Printf("Request from host: %s", r.Host)
 	for _, serverUrl := range strings.Split(*redisServers, ",") {
 		res := testRedis(serverUrl)
