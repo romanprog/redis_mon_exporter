@@ -54,7 +54,7 @@ func DoTests(w http.ResponseWriter, r *http.Request) {
 	log.Printf("Request from host: %s", r.Host)
 	for _, serverUrl := range strings.Split(*redisServers, ",") {
 		res := testRedis(serverUrl)
-		metricLine := fmt.Sprintf(lineTemplate, serverUrl, res)
+		metricLine := fmt.Sprintf(lineTemplate, res)
 		w.Write([]byte(metricLine))
 	}
 	return
