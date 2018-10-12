@@ -1,5 +1,7 @@
 pipeline {
-    agent any
+    agent {
+        label 'docker-cli'
+    }
     stages {
         stage('checkout') {
             steps {
@@ -14,7 +16,7 @@ pipeline {
         }
         stage('Test') {
             steps {
-                sh 'docker run redis_mon -p "8080:8080"'
+                sh 'docker run redis_mon -p "0.0.0.0:8080:8080"'
             }
         }
     }
