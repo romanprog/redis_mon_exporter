@@ -1,0 +1,27 @@
+pipeline {
+    agent any
+    stages {
+        stage('checkout') {
+            steps {
+                checkout scm
+            }
+        }
+
+        stage('Build') {
+            steps {
+                sh "docker build -t redis_mon ."
+            }
+        }
+        stage('Test') {
+            steps {
+                sh 'docker run redis_mon -p "8080:8080"'
+            }
+        }
+    }
+
+    post {
+        always {
+             sh "echo OK"
+        }
+    }
+}
