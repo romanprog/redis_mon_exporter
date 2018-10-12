@@ -13,8 +13,13 @@ import (
 	"github.com/gorilla/mux"
 )
 
-var redisServers = flag.String("redis.servers", getEnv("REDIS_SERVERS", "localhost:6379"), "Address list in format 'host:port,host2:port'")
-var listenPort = flag.String("listen.port", getEnv("LISTEN_PORT", "8080"), "Listen on port. Default 8080")
+var redisServers = flag.String("redis.servers",
+	getEnv("REDIS_SERVERS", "localhost:6379"),
+	"Address list in format 'host:port,host2:port'")
+
+var listenPort = flag.String("listen.port",
+	getEnv("LISTEN_PORT", "8080"),
+	"Listened port.")
 
 func main() {
 	flag.Parse()
