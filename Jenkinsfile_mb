@@ -30,11 +30,10 @@ pipeline {
         }
 		stage('Push to registry') {
 			steps {
-				     sh "docer login -u ${env.REG_SECRET_USER} -p ${env.REG_SECRET_PASS} ${DJEG_REGISTRY_HOST_FQDN}" 
-                    sh "docker tag redis_mon ${DJEG_REGISTRY_HOST_FQDN}/redis_mon"
-				     sh "docker push ${DJEG_REGISTRY_HOST_FQDN}/redis_mon"			
-				    echo "JAVA ETO POLNIY PIZDETS"
-				}
+			     sh "docer login -u ${env.REG_SECRET_USER} -p ${env.REG_SECRET_PASS} ${DJEG_REGISTRY_HOST_FQDN}" 
+                sh "docker tag redis_mon ${DJEG_REGISTRY_HOST_FQDN}/redis_mon"
+			     sh "docker push ${DJEG_REGISTRY_HOST_FQDN}/redis_mon"			
+			     echo "JAVA ETO POLNIY PIZDETS"
 			}
 		}
     }
