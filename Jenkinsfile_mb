@@ -13,8 +13,7 @@ pipeline {
 		
         stage('Build') {
             steps {
-                // sh "docker build -t redis_mon ."
-				dockerImage = docker.build("${DJEG_REGISTRY_HOST_FQDN}/redis_mon")
+                sh "docker build -t redis_mon ."
             }
         }
         stage('Test') {
@@ -27,7 +26,8 @@ pipeline {
 		stage('Push to registry') {
 			steps {
 				 docker.withRegistry(${DJEG_REGISTRY_HOST_FQDN}, "${env.docker-cli}"){ 
-                    dockerImage.push('latest')
+                    sh "docker tag redis_mon ${DJEG_REGISTRY_HOST_FQDN}/redis_mon"
+					 sh "docker push ${DJEG_REGISTRY_HOST_FQDN}/redis_mon"			
                 }
 			}
 		}
