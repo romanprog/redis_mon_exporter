@@ -2,11 +2,6 @@ pipeline {
     agent {
         label 'docker-cli'
     }
-    environment {
-        REG_ID = credentials("registrylogin")
-        REG_ACCESS_USER = "${env.REG_ID_USR}"
-        REG_SECRET_PASS = "${env.REG_ID_PSW}"
-    }
     stages {
         stage('checkout') {
             steps {
