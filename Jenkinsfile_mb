@@ -8,10 +8,13 @@ pipeline {
                 checkout scm
             }
         }
-
+        
+		def dockerImage
+		
         stage('Build') {
             steps {
-                sh "docker build -t redis_mon ."
+                // sh "docker build -t redis_mon ."
+				dockerImage = docker.build(${DJEG_REGISTRY_HOST_FQDN}/redis_mon')
             }
         }
         stage('Test') {
@@ -21,6 +24,13 @@ pipeline {
                 sh 'docker rm -f redis_mon'
             }
         }
+		stage('Push to registry') {
+			steps {
+				 docker.withRegistry(${DJEG_REGISTRY_HOST_FQDN}, ${env.docker-cli}){ 
+                    dockerImage.push('latest')
+                }
+			}
+		}
     }
 
     post {
