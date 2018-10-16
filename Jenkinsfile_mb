@@ -17,7 +17,7 @@ pipeline {
         stage('Test') {
             steps {
                 sh 'docker run --name redis_mon -d -p "8080:8080" redis_mon'
-                sh 'curl djeg.aws.shalb.com:8080/metrics'
+                sh 'curl ${DJEG_JENKINS_HOST_FQDN}:8080/metrics'
                 sh 'docker rm -f redis_mon'
             }
         }
