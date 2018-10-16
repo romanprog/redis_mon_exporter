@@ -30,12 +30,8 @@ pipeline {
         }
 		stage('Push to registry') {
 			steps {
-				 withCredentials([[
-                   credentialsId: 'jenkins',
-                   usernameVariable: 'RUSER',
-                   passwordVariable: 'RPASS'
-                   ]]) {
-						sh "docker login -u ${RUSER} -p ${RPASS} ${DJEG_REGISTRY_HOST_FQDN}" 
+			     withCredentials([usernamePassword(credentialsId: "registrylogin", passwordVariable: 'pass', usernameVariable: 'login')]) {
+						sh "docker login -u ${login} -p ${pass} ${DJEG_REGISTRY_HOST_FQDN}" 
 						sh "docker tag redis_mon ${DJEG_REGISTRY_HOST_FQDN}/redis_mon"
 						sh "docker push ${DJEG_REGISTRY_HOST_FQDN}/redis_mon"			
 						echo "JAVA ETO POLNIY PIZDETS"
