@@ -26,7 +26,7 @@ pipeline {
         }
 		stage('Push to registry') {
 			steps {
-				 docker.withRegistry(${DJEG_REGISTRY_HOST_FQDN}, ${env.docker-cli}){ 
+				 docker.withRegistry(${DJEG_REGISTRY_HOST_FQDN}, "${env.docker-cli}"){ 
                     dockerImage.push('latest')
                 }
 			}
