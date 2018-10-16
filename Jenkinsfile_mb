@@ -9,7 +9,7 @@ pipeline {
             }
         }
         
-		def dockerImage
+		// def dockerImage
 		
         stage('Build') {
             steps {
