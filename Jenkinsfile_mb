@@ -25,7 +25,7 @@ pipeline {
         }
 		stage('Push to registry') {
 			steps {
-				 docker.withRegistry(${DJEG_REGISTRY_HOST_FQDN}, "${env.docker-cli}"){ 
+				 docker.withRegistry("${DJEG_REGISTRY_HOST_FQDN}", "${env.docker-cli}"){ 
                     sh "docker tag redis_mon ${DJEG_REGISTRY_HOST_FQDN}/redis_mon"
 					 sh "docker push ${DJEG_REGISTRY_HOST_FQDN}/redis_mon"			
                 }
