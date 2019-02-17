@@ -16,7 +16,7 @@ deploy:
     id: alpine
     cmd: /bin/sh
   steps:
-    - script
+    - script:
         name: cert
         code: echo $K8_CA_CERT > /tmp/kube_cert
     - bash-template
