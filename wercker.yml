@@ -16,9 +16,7 @@ deploy:
   steps:
     - script:
         name: cert
-        code: echo $JSON_KEY > /tmp/json_key
-    - bigtruedata/gcloud-auth-application-default:
-        key: "/tmp/json_key"
+        code: echo $JSON_KEY > /tmp/json_key; gcloud auth activate-service-account --key-file /tmp/json_key; gcloud beta container clusters get-credentials cluster-dev --region europe-west1 --project $GCLOUD_PROJECT
     - bash-template
     - kubectl:
         command: apply -f k8s-*.yaml
