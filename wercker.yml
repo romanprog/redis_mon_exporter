@@ -12,9 +12,7 @@ build:
         tag: $WERCKER_GIT_BRANCH-$WERCKER_GIT_COMMIT
 
 deploy:
-  box:
-    id: alpine
-    cmd: /bin/sh
+  box: google/cloud-sdk:latest
   steps:
     - script:
         name: cert
