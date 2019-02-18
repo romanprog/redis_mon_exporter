@@ -18,10 +18,10 @@ deploy:
   steps:
     - script:
         name: cert
-        code: echo $K8_CA_CERT > /tmp/kube_cert
+        code: echo $JSON_KEY > /tmp/json_key
+    - bigtruedata/gcloud-auth-application-default:
+        key: "/tmp/json_key"
     - bash-template
     - kubectl:
         command: apply -f k8s-*.yaml
         server: https://$K8_IP
-        token: $ACCESS_TOKEN
-        certificate-authority: "/tmp/kube_cert"
