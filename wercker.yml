@@ -16,7 +16,7 @@ deploy:
   steps:
     - script:
         name: cert
-        code: echo -e "$JSON_KEY" > /tmp/json_key; cat /tmp/json_key; gcloud auth activate-service-account --key-file /tmp/json_key; gcloud beta container clusters get-credentials cluster-dev --region europe-west1 --project $GCLOUD_PROJECT
+        code: echo "$JSON_KEY" > /tmp/json_key; cat /tmp/json_key; gcloud auth activate-service-account --key-file /tmp/json_key; gcloud beta container clusters get-credentials cluster-dev --region europe-west1 --project $GCLOUD_PROJECT
     - bash-template
     - kubectl:
         command: apply -f k8s-*.yaml
