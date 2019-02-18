@@ -6,8 +6,8 @@ build:
         image-name: redis-exporter-img
     - internal/docker-push:
         image-name: redis-exporter-img
-        username: oauth2accesstoken
-        password: $ACCESS_TOKEN
+        username: _json_key
+        password: $JSON_KEY
         repository: $GCR_LOCATION/redis-exporter
         tag: $WERCKER_GIT_BRANCH-$WERCKER_GIT_COMMIT
 
