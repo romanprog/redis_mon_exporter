@@ -1,0 +1,50 @@
+image: docker:latest
+stages:
+  - build
+  - test
+  - deploy
+  - cleanup
+
+variables:
+  APP_NAME: project
+  APP_VERSION: 0.0.1
+  CONTAINER_RELEASE_IMAGE: gitlab.example.org/example/project:latest
+
+build:
+  before_script:
+    - docker build -t ci-project-build-$CI_PROJECT_ID:$CI_BUILD_REF .
+  tags:
+    - docker
+  stage: build
+  script:
+    - docker run --rm -t ci-project-build-$CI_PROJECT_ID:$CI_BUILD_REF
+
+test:
+  services:
+    - postgres
+  tags:
+    - docker
+  stage: test
+  script:
+    - env
+    - echo test
+
+deploy:
+  tags:
+    - docker
+  stage: deploy
+  script:
+    - echo deploy
+  only:
+    - master
+
+cleanup_job:
+  tags:
+    - docker
+  stage: cleanup
+  script:
+    - docker rm -v build_data_$CI_PROJECT_ID_$CI_BUILD_REF
+    - docker rmi ci-project-build-$CI_PROJECT_ID:$CI_BUILD_REF
+  when: always
+
+
