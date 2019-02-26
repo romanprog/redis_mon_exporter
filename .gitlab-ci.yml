@@ -5,6 +5,9 @@ stages:
   - deploy
   - cleanup
 
+services:
+  - docker:dind
+
 variables:
   APP_NAME: project
   APP_VERSION: 0.0.1
