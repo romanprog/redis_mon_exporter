@@ -8,6 +8,7 @@ stages:
 variables:
   APP_NAME: project
   APP_VERSION: 0.0.1
+  DOCKER_HOST: "tcp://localhost:2375"
   CONTAINER_RELEASE_IMAGE: gitlab.example.org/example/project:latest
 
 build:
