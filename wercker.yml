@@ -1,0 +1,8 @@
+build:
+
+build:
+  box: google/cloud-sdk:latest
+  steps:
+    - script:
+        name: cert
+        code: echo $GCR_JSON_KEY_FILE
