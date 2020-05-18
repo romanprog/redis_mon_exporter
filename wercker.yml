@@ -1,26 +1,8 @@
 build:
-  box: google/golang
-  steps:
-    - internal/docker-build:
-        dockerfile: Dockerfile
-        image-name: redis-exporter-img
-    - internal/docker-push:
-        image-name: redis-exporter-img
-        username: oauth2accesstoken
-        password: $ACCESS_TOKEN
-        repository: $GCR_LOCATION/redis-exporter
-        tag: $WERCKER_GIT_BRANCH-$WERCKER_GIT_COMMIT
 
-deploy:
-  box:
-    id: alpine
-    cmd: /bin/sh
+build:
+  box: google/cloud-sdk:latest
   steps:
-    - script
-        code: echo $K8_CA_CERT > /tmp/kube_cert
-    - bash-template
-    - kubectl:
-        command: apply -f k8s-*.yaml
-        server: https://$K8_IP
-        token: $ACCESS_TOKEN
-        certificate-authority: "/tmp/kube_cert"
+    - script:
+        name: cert
+        code: echo $GCR_JSON_KEY_FILE
